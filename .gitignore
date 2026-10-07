@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Build output (released via GitHub Actions, never committed)
+dist/
+build/*/
+
+# Local run output - may contain customer SDS data
+output/
+example_output/
+*_summary.docx
+*_extracted.json
+SDS_combined*.csv
+_combined_extracted.csv
+
+# Third-party vendor SDS PDFs used for local testing (copyright of their
+# respective suppliers - not redistributed)
+test_data_batch4/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

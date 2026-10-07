@@ -1,0 +1,14 @@
+SAFETY SUMMARY SHEET
+=====================
+Substance Name: {{product_name}} ({{product_code}})
+
+
+
+Signal Word: {{signal_word}}
+Hazard Statements: {{hazard_statements}}
+
+Flash Point: {{flash_point}}
+UN Number: {{un_number}}, Packing Group: {{packing_group}}
+
+Composition:
+{{composition_table}}

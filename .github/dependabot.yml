@@ -1,0 +1,12 @@
+# Weekly PRs for security/version updates. Nothing merges automatically -
+# each update goes through the normal build + self-test before you merge it.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly

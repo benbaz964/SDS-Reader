@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Static site: no scripts, no forms, no third-party requests. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>SDS Reader · Offline safety data sheet extraction</title>
+  <meta name="description" content="Turn safety data sheet PDFs into your own Word template, in bulk, entirely offline. A single Windows app with no Python, no install and no admin rights needed.">
+  <meta property="og:title" content="SDS Reader">
+  <meta property="og:description" content="Turn safety data sheet PDFs into your own Word template, in bulk, entirely offline.">
+  <meta property="og:image" content="assets/icon.png">
+  <meta name="theme-color" content="#0f1a24">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="SDS Reader home">
+        <img src="assets/favicon.png" alt="" width="28" height="28">
+        <span>SDS Reader</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#templates">Templates</a>
+        <a href="#security">Security</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-sm" href="#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="dot"></span> Windows desktop app · 100% offline</p>
+          <h1>Safety data sheets&nbsp;in.<br><span class="accent">Your document</span> out.</h1>
+          <p class="lede">SDS Reader reads supplier SDS PDFs, one file or a whole folder at a time, and fills your own Word template with the hazards, PPE, first aid, exposure limits and ingredient breakdown.</p>
+          <div class="cta" id="download">
+            <a class="btn btn-lg" href="https://github.com/__REPO__/releases/latest/download/SDS-Reader.exe" rel="noopener">
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v9.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V4a1 1 0 0 1 1-1ZM5 19a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Z"/></svg>
+              Download for Windows
+            </a>
+            <div class="cta-alt">
+              <a href="https://github.com/__REPO__/releases/latest/download/SDS-Reader-portable.zip" rel="noopener">Portable .zip</a>
+              <span aria-hidden="true">·</span>
+              <a href="https://github.com/__REPO__/releases/latest/download/SDS-summary-template.docx" rel="noopener">Starter template</a>
+              <span aria-hidden="true">·</span>
+              <a href="https://github.com/__REPO__/releases/latest" rel="noopener">Release notes &amp; checksums</a>
+            </div>
+          </div>
+          <ul class="meta">
+            <li>No Python or install needed</li>
+            <li>No admin rights</li>
+            <li>Files never leave your PC</li>
+          </ul>
+        </div>
+
+        <!-- App illustration (pure HTML/CSS, mirrors the real UI) -->
+        <div class="mock" role="img" aria-label="Illustration of the SDS Reader app: a list of SDS PDFs, a custom template selected, and a Process button">
+          <div class="mock-bar">
+            <span class="mock-logo"></span><b>SDS Reader</b><em>Offline safety data sheet extraction</em>
+          </div>
+          <div class="mock-body">
+            <div class="mock-card mock-files">
+              <small>STEP 1</small><strong>Safety data sheets</strong>
+              <div class="mock-btns"><i>Add PDFs…</i><i>Add folder…</i></div>
+              <ul>
+                <li><span>isopropyl-alcohol.pdf</span><b class="ok">Done</b></li>
+                <li><span>white-spirit.pdf</span><b class="ok">Done</b></li>
+                <li><span>barium-chloride.pdf</span><b class="ok">Done</b></li>
+                <li><span>degreaser-hd.pdf</span><b class="run">Reading…</b></li>
+                <li><span>aluminium-powder.pdf</span><b>Waiting</b></li>
+              </ul>
+            </div>
+            <div class="mock-side">
+              <div class="mock-card">
+                <small>STEP 2</small><strong>Output template</strong>
+                <p class="radio">My own template</p>
+                <p class="file">COSHH-assessment.docx</p>
+                <p class="good">✓ 24 placeholders recognised</p>
+              </div>
+              <div class="mock-card">
+                <small>STEP 3</small><strong>Output</strong>
+                <p class="file">Documents\SDS Output</p>
+                <p class="check">Combined spreadsheet</p>
+              </div>
+            </div>
+          </div>
+          <div class="mock-foot">
+            <div class="mock-progress"><span></span></div>
+            <i class="mock-go">Process</i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how">
+      <div class="wrap">
+        <p class="kicker">How it works</p>
+        <h2>Three steps, no setup.</h2>
+        <ol class="steps">
+          <li>
+            <span class="num">1</span>
+            <h3>Add your SDSs</h3>
+            <p>Pick individual PDFs, or point it at a folder (and its subfolders) holding hundreds of them.</p>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <h3>Upload your template</h3>
+            <p>Use the built-in summary, or upload your own <code>.docx</code>, <code>.txt</code> or <code>.md</code> with <code>{{placeholders}}</code>. It's remembered next time.</p>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <h3>Process</h3>
+            <p>Get one filled document per SDS, plus an optional combined spreadsheet for the whole batch.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section alt">
+      <div class="wrap">
+        <p class="kicker">Built for real-world SDSs</p>
+        <h2>Reads any vendor's format.</h2>
+        <div class="grid">
+          <article class="feature">
+            <h3>GHS 16-section aware</h3>
+            <p>Finds sections by structure, not by one supplier's layout. It's been tested on Fisher, Fuchs, INEOS, SC Johnson, Bartoline and more.</p>
+          </article>
+          <article class="feature">
+            <h3>Ingredient breakdown</h3>
+            <p>Composition, CAS numbers, concentrations, WEL limits and flagged carcinogen, mutagen, reprotoxic and sensitiser mentions, one table row per ingredient.</p>
+          </article>
+          <article class="feature">
+            <h3>Verbatim wording</h3>
+            <p>First aid, fire-fighting, spillage and handling text is copied from the source SDS, not paraphrased.</p>
+          </article>
+          <article class="feature">
+            <h3>Your layout, your brand</h3>
+            <p>Formatting, logos, headers and tables in your Word template are kept. Only the placeholders are replaced.</p>
+          </article>
+          <article class="feature">
+            <h3>Private by design</h3>
+            <p>No internet connection, no accounts, no telemetry. Your documents are processed on your PC and stay there.</p>
+          </article>
+          <article class="feature">
+            <h3>Works on locked-down PCs</h3>
+            <p>One self-contained program. No Python, no installer, no administrator rights.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Templates -->
+    <section class="section" id="templates">
+      <div class="wrap split">
+        <div>
+          <p class="kicker">Templates</p>
+          <h2>Make any document a template.</h2>
+          <p>Type placeholders in double curly braces wherever a value should go. When you upload a template, the app tells you which placeholders it recognised and flags any typos before you run a batch.</p>
+          <ul class="ticks">
+            <li>Start from the <a href="https://github.com/__REPO__/releases/latest/download/SDS-summary-template.docx" rel="noopener">starter template</a>, or use <em>Save built-in template to edit</em> in the app.</li>
+            <li>The full placeholder list is searchable in the app. Double-click one to copy it.</li>
+            <li>To get one table row per ingredient, put the <code>{{row:substance_breakdown.…}}</code> placeholders in a single table row.</li>
+          </ul>
+        </div>
+        <figure class="doc">
+          <figcaption>my-coshh-template.docx</figcaption>
+          <div class="doc-page">
+            <p class="doc-h">COSHH Assessment</p>
+            <p><b>Product:</b> <code>{{product_name}}</code></p>
+            <p><b>Signal word:</b> <code>{{signal_word}}</code></p>
+            <p><b>Hazards:</b> <code>{{hazard_statement_text}}</code></p>
+            <p><b>Gloves:</b> <code>{{hand_protection}}</code></p>
+            <table>
+              <thead><tr><th>Ingredient</th><th>CAS</th><th>%</th></tr></thead>
+              <tbody><tr>
+                <td><code>{{row:substance_breakdown.name}}</code></td>
+                <td><code>{{row:substance_breakdown.cas}}</code></td>
+                <td><code>{{row:substance_breakdown.concentration}}</code></td>
+              </tr></tbody>
+            </table>
+          </div>
+        </figure>
+      </div>
+      <div class="wrap">
+        <details class="ph-table">
+          <summary>Most-used placeholders</summary>
+          <div class="ph-grid">
+            <div><code>{{product_name}}</code><span>Product / substance name</span></div>
+            <div><code>{{cas_number_display}}</code><span>CAS no., or "N/A (mixture)"</span></div>
+            <div><code>{{sds_version_date}}</code><span>SDS version &amp; revision date</span></div>
+            <div><code>{{manufacturer_name}}</code><span>Supplier</span></div>
+            <div><code>{{signal_word}}</code><span>Danger / Warning</span></div>
+            <div><code>{{pictograms}}</code><span>GHS pictograms</span></div>
+            <div><code>{{hazard_codes}}</code><span>H-codes only, e.g. H225, H319</span></div>
+            <div><code>{{hazard_statement_text}}</code><span>Hazard statement wording</span></div>
+            <div><code>{{precautionary_statements}}</code><span>P-statements</span></div>
+            <div><code>{{first_aid}}</code><span>First-aid measures</span></div>
+            <div><code>{{fire_advice}}</code><span>Fire-fighting advice</span></div>
+            <div><code>{{spillage_release_advice}}</code><span>Spillage / release</span></div>
+            <div><code>{{storage_requirements}}</code><span>Storage conditions</span></div>
+            <div><code>{{respiratory_protection}}</code><span>RPE</span></div>
+            <div><code>{{hand_protection}}</code><span>Gloves</span></div>
+            <div><code>{{eye_protection}}</code><span>Eye protection</span></div>
+            <div><code>{{skin_protection}}</code><span>Skin / body protection</span></div>
+            <div><code>{{flash_point}}</code><span>Flash point</span></div>
+            <div><code>{{un_number}}</code><span>UN number</span></div>
+            <div><code>{{incompatible_materials}}</code><span>Incompatible materials</span></div>
+          </div>
+          <p class="note">There are more than 140 placeholders in total. The app's <em>Placeholder list</em> shows them all.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Security -->
+    <section class="section alt" id="security">
+      <div class="wrap">
+        <p class="kicker">Security &amp; trust</p>
+        <h2>Safe to run, easy to verify.</h2>
+        <div class="grid">
+          <article class="feature">
+            <h3>Built in the open</h3>
+            <p>Every download is built automatically from the public source code by GitHub Actions and self-tested before it's published. Nobody uploads it by hand.</p>
+          </article>
+          <article class="feature">
+            <h3>Checksums for every release</h3>
+            <p>Each release lists SHA-256 hashes. To check your download, run <code>Get-FileHash SDS-Reader.exe</code> in PowerShell and compare.</p>
+          </article>
+          <article class="feature">
+            <h3>Never overwrites your files</h3>
+            <p>It only reads your PDFs and template. Outputs get new names (<code>(2)</code>, <code>(3)</code>…) rather than replacing anything already there.</p>
+          </article>
+          <article class="feature">
+            <h3>Only touches what it needs</h3>
+            <p>No network access, no macros (macro-enabled templates are refused), and invalid or oversized PDFs are rejected before they're opened.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="wrap narrow">
+        <p class="kicker">FAQ</p>
+        <h2>Questions.</h2>
+        <details>
+          <summary>Windows says "Windows protected your PC". Is that OK?</summary>
+          <p>That's SmartScreen. It shows for any new app that isn't code-signed yet. Click <em>More info</em> → <em>Run anyway</em>. If you'd like to be sure the file is genuine first, compare its SHA-256 hash with the one on the release page.</p>
+        </details>
+        <details>
+          <summary>My work PC blocks the .exe. What can I do?</summary>
+          <p>Try the <strong>portable .zip</strong>. Extract it to a folder (for example in Documents) and run <code>SDS-Reader.exe</code> from there. Some IT policies block programs that unpack themselves into a temporary folder, and the portable version doesn't do that. If your PC only allows approved software, ask IT to allow it. They can check the release checksums and the source code.</p>
+        </details>
+        <details>
+          <summary>Does it need the internet, or send my documents anywhere?</summary>
+          <p>No. Everything runs on your PC. The app makes no network connections. The only exception is an optional, off-by-default "local Ollama AI check", which talks only to an AI model running on your own machine.</p>
+        </details>
+        <details>
+          <summary>Can it read scanned SDSs?</summary>
+          <p>Only if the PDF has a text layer. For image-only scans, run them through OCR first (for example with the free <em>ocrmypdf</em>).</p>
+        </details>
+        <details>
+          <summary>How accurate is it?</summary>
+          <p>It's very good on standard 16-section GHS sheets, but it uses rules rather than a trained model. Treat the output as a time-saver, not an authority. Always check safety-critical information against the original SDS.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="brand"><img src="assets/favicon.png" alt="" width="22" height="22"><span>SDS Reader</span></div>
+      <p>SDS Reader helps you extract information but does not replace professional judgement. Always verify output against the original safety data sheet before relying on it.</p>
+      <p><a href="https://github.com/__REPO__" rel="noopener">Source code</a> · <a href="https://github.com/__REPO__/security/policy" rel="noopener">Report a security issue</a></p>
+    </div>
+  </footer>
+</body>
+</html>
