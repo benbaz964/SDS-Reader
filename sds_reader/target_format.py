@@ -85,7 +85,11 @@ def _exposure_limits_text(values: Dict) -> str:
                 lines.append(", ".join(parts))
         if lines:
             return "\n".join(lines)
-    text = values.get("exposure_limits_text")
+    # No well-formed table: the Section 8 lines that actually state a limit
+    # beat the text under an 'Occupational exposure limits' heading, which is
+    # often just 'None.' or a statement about one ingredient while the real
+    # values sit further down.
+    text = values.get("exposure_limit_lines") or values.get("exposure_limits_text")
     return text if text else _NOT_STATED
 
 

@@ -33,6 +33,8 @@ class FieldDef:
                               # they are treated as flexible regex fragments, see extractor.py)
     multiline: bool = True    # whether value may span multiple lines/until next label
     kind: str = "text"        # "text" | "list" | "table"
+    collect: bool = False     # gather every occurrence (e.g. respiratory AND skin sensitisation), not just the first
+    keep_label: bool = False  # prefix each collected value with the label text that introduced it
 
 
 # ---------------------------------------------------------------------------
@@ -180,10 +182,21 @@ SECTION_8 = [
     FieldDef("ppe_eye", 8, [r"eye[\s/]*(?:(?:and|/)\s*face\s*)?protection"]),
     FieldDef("ppe_skin", 8, [r"hand protection", r"gloves?\s*:"]),
     FieldDef("ppe_body", 8, [
-        r"other skin and body", r"skin (?:and body )?protection", r"body protection",
-    ]),
+        r"other skin and body", r"skin and body protection", r"body protection",
+        r"other skin protection",
+    ], collect=True),
+    # Bare "Skin protection" heading: some vendors put gloves under it, others
+    # clothing - derived.py decides which by looking at the text.
+    FieldDef("ppe_skin_general", 8, [r"skin protection"]),
     FieldDef("ppe_respiratory", 8, [r"respiratory protection"]),
     FieldDef("ppe_general", 8, [r"personal protective equipment\s*:", r"general hygiene\s*:"]),
+    # Not exported themselves - present so the fields above stop at these
+    # headings instead of running on into them.
+    FieldDef("hygiene_measures", 8, [r"hygiene measures"]),
+    FieldDef("thermal_hazards", 8, [r"thermal hazards"]),
+    FieldDef("environmental_exposure_controls", 8, [
+        r"environmental\s+(?:exposure\s+)?controls?", r"control of environmental exposure",
+    ]),
 ]
 
 # ---------------------------------------------------------------------------
@@ -242,11 +255,15 @@ SECTION_11 = [
     FieldDef("acute_toxicity", 11, [r"acute toxicity", r"ld50", r"lc50"]),
     FieldDef("skin_corrosion_irritation", 11, [r"skin corrosion", r"skin irritation"]),
     FieldDef("eye_damage_irritation", 11, [r"eye damage", r"eye irritation"]),
-    FieldDef("sensitization", 11, [r"sensiti[sz]ation"]),
-    FieldDef("germ_cell_mutagenicity", 11, [r"germ cell mutagenicity", r"germ cell", r"mutagenicity"]),
-    FieldDef("carcinogenicity", 11, [r"carcinogenicity"]),
-    FieldDef("reproductive_toxicity", 11, [r"reproductive toxicity"]),
-    FieldDef("teratogenicity", 11, [r"teratogenicity"]),
+    FieldDef("sensitization", 11, [r"(?:respiratory(?:\s+or\s+skin)?\s+|skin\s+)?sensiti[sz]ation"],
+             collect=True, keep_label=True),
+    # collect=True: many sheets answer these more than once (product level,
+    # then per ingredient, or a heading block then a 'chronic effects'
+    # summary) and every answer belongs in the output.
+    FieldDef("germ_cell_mutagenicity", 11, [r"germ cell mutagenicity", r"germ cell", r"mutagenicity"], collect=True),
+    FieldDef("carcinogenicity", 11, [r"carcinogenicity"], collect=True),
+    FieldDef("reproductive_toxicity", 11, [r"reproductive toxicity"], collect=True),
+    FieldDef("teratogenicity", 11, [r"teratogenicity"], collect=True),
     FieldDef("developmental_effects", 11, [r"developmental effects"]),
     FieldDef("fertility_effects", 11, [r"fertility effects"]),
     FieldDef("numerical_toxicity_measures", 11, [r"numerical measures of toxicity"]),

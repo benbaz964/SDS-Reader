@@ -1,4 +1,4 @@
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 from .extractor import extract_sds, SDSRecord
 from .batch import process_folder, find_pdfs

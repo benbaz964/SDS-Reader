@@ -435,16 +435,28 @@ test_mock_ollama.py                        mock Ollama server for testing llm_re
   producing wrong data, but it won't extract anything either. If you
   regularly deal with these, they'd need their own section-pattern set
   added to `schema.py`.
-- **Per-ingredient toxicology flags are proximity heuristics, not NLP.**
+- **Per-ingredient toxicology flags are sentence-level heuristics, not NLP.**
   The Substance Breakdown table's carcinogen/mutagen/reproductive-toxicant/
-  sensitiser columns work by scanning text near each ingredient's name/CAS
-  number in Sections 2/11/12 for the relevant keyword, with basic negation
-  handling (so "did not indicate mutagenic potential" won't false-flag).
-  On short SDS's where multiple ingredients are listed close together,
-  a hazard genuinely tied to one ingredient can occasionally get attributed
-  to its neighbor too, since there's no real entity-relationship parsing
-  behind it — that's why the template calls these "Yes = worth checking the
-  source", not certified classifications.
+  sensitiser columns look only at sentences in Sections 2/11/12 that name
+  the ingredient (or its CAS number), or sit directly under a sub-heading
+  naming it; on a single-substance sheet every sentence counts. Headings
+  ("Carcinogenicity:") never count as a finding, and negation before or
+  after the keyword ("No component ... is identified as a carcinogen",
+  "...the classification criteria are not met") is respected. "Yes" still
+  means "worth checking the source", not a certified classification, and
+  "Not stated" covers both "the SDS says no" and "the SDS says nothing".
+- **Validation.** `tests/test_extraction.py` holds hand-checked expected
+  values for every training SDS; CI runs it on every build. A full manual
+  field-by-field audit of all 24 training sheets (October 2026) found and
+  fixed ~20 generic bugs - notably the page-footer stripper deleting real
+  answers that an SDS repeats, labels being matched mid-sentence, and
+  hazard flags attributed to neighbouring ingredients.
+- **The optional Ollama pass is off by default for a reason.** Compared on
+  the same training sheets (llama3.1:8b), it agreed with the fixes above and
+  usefully distinguishes "No" from "Not stated", but it also put glove and
+  eye-protection text into the Respiratory protection field of one sheet
+  and degraded several Vapour fields - and takes minutes per document on
+  CPU. Treat its output as a second opinion, not an improvement.
 - **One "main" value per field**: fields are captured as the first matching
   occurrence in their section. For most SDS's there's exactly one, but a
   very unusual document repeating a label twice in one section would only
